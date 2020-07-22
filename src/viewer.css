@@ -1,0 +1,93 @@
+body {
+    margin: 0;
+    padding: 0 8px;
+    width: 99%;
+}
+
+h1 {
+    background-color: #004c8c;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    color: #ffffff;
+    padding-bottom: 8px;
+    padding-top: 8px;
+    text-align: center;
+    width: 100%;
+}
+
+h2, h3 {
+    text-align: center;
+    vertical-align: middle;
+    width: 100%;
+}
+
+code {
+    max-width: 100%;
+    word-wrap: break-word;
+}
+
+.content {
+    border-top: #909090 solid 1px;
+    margin-top: 8px;
+    padding: 8px 4px;
+}
+
+.page-content {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.page-nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.page-nav > button {
+    margin: 0 12px;
+}
+
+.pdf-navbar {
+    background-color: #454545;
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+}
+
+.pdf-navbar button {
+    background-color: #303030;
+    border: #dddddd solid 1px;
+    border-radius: 4px;
+    color: #dddddd;
+    font-weight: bold;
+    padding: 4px 8px;
+}
+
+.spacer {
+    width: 48px;
+}
+
+.title-bar {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.two-col {
+    display: flex;
+    justify-content: space-around;
+}
+
+.two-col > * {
+    padding: 0 8px;
+}
+
+.two-col > :first-child {
+    border-right: #909090 solid 1px;
+    flex-grow: 2;
+}
+
+.two-col > :last-child {
+    flex-grow: 1;
+}
