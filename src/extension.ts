@@ -2,7 +2,6 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as fs from "fs";
 import * as mime from "mime";
-import * as path from "path";
 import * as vscode from "vscode";
 import {Base64Utils} from "./base64utils";
 import {View} from "./view";

@@ -4,6 +4,11 @@ body {
     width: 99%;
 }
 
+code {
+    max-width: 100%;
+    word-wrap: break-word;
+}
+
 h1 {
     background-color: #004c8c;
     border-top-left-radius: 4px;
@@ -21,15 +26,23 @@ h2, h3 {
     width: 100%;
 }
 
-code {
-    max-width: 100%;
-    word-wrap: break-word;
-}
-
 .content {
     border-top: #909090 solid 1px;
-    margin-top: 8px;
-    padding: 8px 4px;
+    margin: 4px;
+    padding: 4px 0;
+}
+
+.encoded-content {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.img-content {
+    border-top: #909090 solid 1px;
+    margin: 4px;
+    padding: 8px 0;
 }
 
 .page-content {
@@ -46,6 +59,12 @@ code {
 
 .page-nav > button {
     margin: 0 12px;
+}
+
+.pdf-content {
+    border-top: #909090 solid 1px;
+    margin-top: 4px;
+    padding: 4px 0;
 }
 
 .pdf-navbar {
@@ -84,10 +103,19 @@ code {
 }
 
 .two-col > :first-child {
-    border-right: #909090 solid 1px;
     flex-grow: 2;
 }
 
 .two-col > :last-child {
     flex-grow: 1;
+}
+
+#switchButton {
+    background-color: #303030;
+    border: #ffffff solid 1px;
+    border-radius: 4px;
+    color: #ffffff;
+    max-width: fit-content;
+    margin: 4px;
+    padding: 4px;
 }
