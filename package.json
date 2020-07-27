@@ -2,18 +2,33 @@
 	"name": "base64viewer",
 	"displayName": "Base64Viewer",
 	"description": "Easy to use base 64 decoder/encoder and viewer",
-	"version": "0.0.1",
+	"publisher": "JasonMejane",
+	"version": "1.0.0",
 	"engines": {
 		"vscode": "^1.47.0"
 	},
 	"categories": [
-		"Other"
+		"Programming Languages"
 	],
+	"keywords": [
+		"base64",
+		"viewer",
+		"decoder",
+		"encoder"
+	],
+	"icon": "vscode-base64viewer.png",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/JasonMejane/vscode-base64viewer.git"
+	},
+	"bugs": {
+		"url": "https://github.com/JasonMejane/vscode-base64viewer/issues"
+	},
 	"activationEvents": [
 		"onCommand:base64viewer.decodeBase64",
 		"onCommand:base64viewer.encodeBase64"
 	],
-	"main": "./out/extension.js",
+	"main": "./dist/extension.js",
 	"contributes": {
 		"commands": [
 			{
@@ -27,12 +42,16 @@
 		]
 	},
 	"scripts": {
-		"vscode:prepublish": "npm run compile",
+		"vscode:prepublish": "webpack --mode production",
 		"compile": "tsc -p ./",
 		"lint": "eslint src --ext ts",
-		"watch": "tsc -watch -p ./",
 		"pretest": "npm run compile && npm run lint",
-		"test": "node ./out/test/runTest.js"
+		"test": "node ./out/test/runTest.js",
+		"test-compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"webpack": "webpack --mode development",
+		"webpack-dev": "webpack --mode development --watch",
+		"package": "vsce package"
 	},
 	"dependencies": {
 		"mime": "2.4.6",
@@ -47,6 +66,7 @@
 		"@types/vscode": "^1.47.0",
 		"@typescript-eslint/eslint-plugin": "^2.30.0",
 		"@typescript-eslint/parser": "^2.30.0",
+		"css-loader": "^4.0.0",
 		"eslint": "^6.8.0",
 		"glob": "^7.1.6",
 		"mocha": "^7.1.2",
