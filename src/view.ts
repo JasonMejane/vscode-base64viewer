@@ -3,6 +3,131 @@ import * as path from "path";
 import { Base64Utils } from "./base64utils";
 
 export class View {
+    private style = `
+    body {
+        background-color: #1e1e1e;
+        margin: 0;
+        padding: 0 8px;
+        width: 99%;
+    }
+    
+    code {
+        max-width: 100%;
+        word-wrap: break-word;
+    }
+    
+    h1 {
+        background-color: #004c8c;
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+        color: #ffffff;
+        padding-bottom: 8px;
+        padding-top: 8px;
+        text-align: center;
+        width: 100%;
+    }
+    
+    h2, h3 {
+        text-align: center;
+        vertical-align: middle;
+        width: 100%;
+    }
+    
+    .content {
+        border-top: #909090 solid 1px;
+        margin: 4px;
+        padding: 4px 0;
+    }
+    
+    .encoded-content {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    
+    .img-content {
+        border-top: #909090 solid 1px;
+        margin: 4px;
+        padding: 8px 0;
+    }
+    
+    .page-content {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+    }
+    
+    .page-nav {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    
+    .page-nav > button {
+        margin: 0 12px;
+    }
+    
+    .pdf-content {
+        border-top: #909090 solid 1px;
+        margin-top: 4px;
+        padding: 4px 0;
+    }
+    
+    .pdf-navbar {
+        background-color: #454545;
+        display: flex;
+        justify-content: space-between;
+        padding: 8px;
+    }
+    
+    .pdf-navbar button {
+        background-color: #303030;
+        border: #dddddd solid 1px;
+        border-radius: 4px;
+        color: #dddddd;
+        font-weight: bold;
+        padding: 4px 8px;
+    }
+    
+    .spacer {
+        width: 48px;
+    }
+    
+    .title-bar {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+    }
+    
+    .two-col {
+        display: flex;
+        justify-content: space-around;
+    }
+    
+    .two-col > * {
+        padding: 0 8px;
+    }
+    
+    .two-col > :first-child {
+        flex-grow: 2;
+    }
+    
+    .two-col > :last-child {
+        flex-grow: 1;
+    }
+    
+    #switchButton {
+        background-color: #303030;
+        border: #ffffff solid 1px;
+        border-radius: 4px;
+        color: #ffffff;
+        max-width: fit-content;
+        margin: 4px;
+        padding: 4px;
+    }
+    `;
+
     public createView(extensionRoot: vscode.Uri, target: string, mimeType: string, viewType: string, filePath?: string) {
         // Create and show panel
         var webviewPanel = vscode.window.createWebviewPanel("base64viewer", "Base64 Viewer", vscode.ViewColumn.Two, {});
@@ -39,8 +164,9 @@ export class View {
                         <meta name="google" content="notranslate">
                         <meta http-equiv="X-UA-Compatible" content="IE=edge">
                         <title>Base 64 Viewer</title>
+                        <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src https:; script-src 'unsafe-eval' 'unsafe-inline' vscode-resource:; style-src vscode-resource: 'unsafe-inline';">
                         <script src="${resolveAsUri("lib", "pdfjs-dist", "pdf.js")}"></script>
-	                    <link rel="stylesheet" href="${resolveAsUri("src", "viewer.css")}">
+                        <style>${this.style}</style>
                     </head>`;
             body = `
                 <body>
@@ -183,7 +309,8 @@ export class View {
                         <meta name="google" content="notranslate">
                         <meta http-equiv="X-UA-Compatible" content="IE=edge">
                         <title>Base 64 Viewer</title>
-	                    <link rel="stylesheet" href="${resolveAsUri("src", "viewer.css")}">
+                        <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src https:; script-src 'unsafe-eval' 'unsafe-inline' vscode-resource:; style-src vscode-resource: 'unsafe-inline';">
+                        <style>${this.style}</style>
                     </head>`;
             body = `
                 <body>
@@ -209,7 +336,8 @@ export class View {
                         <meta name="google" content="notranslate">
                         <meta http-equiv="X-UA-Compatible" content="IE=edge">
                         <title>Base 64 Viewer</title>
-                        <link rel="stylesheet" href="${resolveAsUri("src", "viewer.css")}">
+                        <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src https:; script-src 'unsafe-eval' 'unsafe-inline' vscode-resource:; style-src vscode-resource: 'unsafe-inline';">
+                        <style>${this.style}</style>
                     </head>`;
             body = `
                 <body>
@@ -241,7 +369,8 @@ export class View {
                         <meta name="google" content="notranslate">
                         <meta http-equiv="X-UA-Compatible" content="IE=edge">
                         <title>Base 64 Viewer</title>
-	                    <link rel="stylesheet" href="${resolveAsUri("src", "viewer.css")}">
+                        <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src https:; script-src 'unsafe-eval' 'unsafe-inline' vscode-resource:; style-src vscode-resource: 'unsafe-inline';">
+                        <style>${this.style}</style>
                     </head>`;
             body = `
                 <body>
@@ -282,8 +411,9 @@ export class View {
                         <meta name="google" content="notranslate">
                         <meta http-equiv="X-UA-Compatible" content="IE=edge">
                         <title>Base 64 Viewer</title>
+                        <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src https:; script-src 'unsafe-eval' 'unsafe-inline' vscode-resource:; style-src vscode-resource: 'unsafe-inline';">
+                        <style>${this.style}</style>
                         <script src="${resolveAsUri("lib", "pdfjs-dist", "pdf.js")}"></script>
-                        <link rel="stylesheet" href="${resolveAsUri("src", "viewer.css")}">
                     </head>`;
             body = `
                 <body>
@@ -366,7 +496,8 @@ export class View {
                         <meta name="google" content="notranslate">
                         <meta http-equiv="X-UA-Compatible" content="IE=edge">
                         <title>Base 64 Viewer</title>
-                        <link rel="stylesheet" href="${resolveAsUri("src", "viewer.css")}">
+                        <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src https:; script-src 'unsafe-eval' 'unsafe-inline' vscode-resource:; style-src vscode-resource: 'unsafe-inline';">
+                        <style>${this.style}</style>
                     </head>`;
             body = `
                 <body>

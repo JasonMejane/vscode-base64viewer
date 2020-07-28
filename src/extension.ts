@@ -63,7 +63,7 @@ async function encodeAndDisplay(extensionRoot: vscode.Uri, uri: any) {
 			v.createView(extensionRoot, data, fileMime, "encoding", "(" + filePath + ")");
 		  });        
     } else {
-		showErrorPopup("Uri undefined");
+		showErrorPopup("Operation cancelled");
     }
 }
 

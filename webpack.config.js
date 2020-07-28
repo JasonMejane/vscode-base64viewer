@@ -19,13 +19,20 @@ const config = {
     vscode: "commonjs vscode",
   },
   resolve: {
-    extensions: [".ts", ".js", ".css"],
+    extensions: [".ts", ".js"],
   },
   module: {
     rules: [
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"],
+        use: [
+          {
+            loader: "style-loader",
+          },
+          {
+            loader: "css-loader",
+          },
+        ],
       },
       {
         test: /\.ts$/,
