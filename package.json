@@ -16,6 +16,7 @@
 		"decoder",
 		"encoder"
 	],
+	"galleryBanner.color": "#004c8c",
 	"icon": "vscode-base64viewer.png",
 	"repository": {
 		"type": "git",

@@ -3,6 +3,7 @@ node_modules
 demo/
 out/
 src/
+**/*.ts
 tsconfig.json
 vsc-extension-quickstart.md
 vscode-base64viewer.svg
