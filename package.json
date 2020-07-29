@@ -18,11 +18,14 @@
 	],
 	"galleryBanner.color": "#004c8c",
 	"icon": "vscode-base64viewer.png",
+	"license": "SEE LICENSE IN LICENSE",
+	"homepage": "https://github.com/JasonMejane/vscode-base64viewer/blob/master/README.md",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/JasonMejane/vscode-base64viewer.git"
 	},
 	"bugs": {
+		"email": "jason.mejane@gmail.com",
 		"url": "https://github.com/JasonMejane/vscode-base64viewer/issues"
 	},
 	"activationEvents": [
