@@ -1,85 +1,101 @@
 {
-	"name": "base64viewer",
-	"displayName": "Base64Viewer",
-	"description": "Easy to use base 64 decoder/encoder and viewer",
-	"publisher": "JasonMejane",
-	"version": "1.0.0",
-	"engines": {
-		"vscode": "^1.47.0"
-	},
-	"categories": [
-		"Programming Languages"
-	],
-	"keywords": [
-		"base64",
-		"viewer",
-		"decoder",
-		"encoder"
-	],
-	"galleryBanner.color": "#004c8c",
-	"icon": "vscode-base64viewer.png",
-	"license": "SEE LICENSE IN LICENSE",
-	"homepage": "https://github.com/JasonMejane/vscode-base64viewer/blob/master/README.md",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/JasonMejane/vscode-base64viewer.git"
-	},
-	"bugs": {
-		"email": "jason.mejane@gmail.com",
-		"url": "https://github.com/JasonMejane/vscode-base64viewer/issues"
-	},
-	"activationEvents": [
-		"onCommand:base64viewer.decodeBase64",
-		"onCommand:base64viewer.encodeBase64"
-	],
-	"main": "./dist/extension.js",
-	"contributes": {
-		"commands": [
-			{
-				"command": "base64viewer.decodeBase64",
-				"title": "Base64Viewer: Decode from Base 64"
-			},
-			{
-				"command": "base64viewer.encodeBase64",
-				"title": "Base64Viewer: Encode to Base 64"
-			}
-		]
-	},
-	"scripts": {
-		"vscode:prepublish": "webpack --mode production",
-		"compile": "tsc -p ./",
-		"lint": "eslint src --ext ts",
-		"pretest": "npm run compile && npm run lint",
-		"test": "node ./out/test/runTest.js",
-		"test-compile": "tsc -p ./",
-		"watch": "tsc -watch -p ./",
-		"webpack": "webpack --mode development",
-		"webpack-dev": "webpack --mode development --watch",
-		"package": "vsce package"
-	},
-	"dependencies": {
-		"mime": "2.4.6",
-		"pdfjs-dist": "2.4.456"
-	},
-	"devDependencies": {
-		"@types/glob": "^7.1.1",
-		"@types/mime": "^2.0.3",
-		"@types/mocha": "^7.0.2",
-		"@types/node": "^13.13.15",
-		"@types/pdfjs-dist": "^2.1.5",
-		"@types/vscode": "^1.47.0",
-		"@typescript-eslint/eslint-plugin": "^2.30.0",
-		"@typescript-eslint/parser": "^2.30.0",
-		"css-loader": "^4.0.0",
-		"eslint": "^6.8.0",
-		"glob": "^7.1.6",
-		"mocha": "^7.1.2",
-		"pdfjs-dist": "2.4.456",
-		"style-loader": "^1.2.1",
-		"ts-loader": "^8.0.1",
-		"typescript": "^3.8.3",
-		"vscode-test": "^1.3.0",
-		"webpack": "^4.44.0",
-		"webpack-cli": "^3.3.12"
-	}
+    "name": "base64viewer",
+    "displayName": "Base64Viewer",
+    "description": "Easy to use base 64 decoder/encoder and viewer",
+    "publisher": "JasonMejane",
+    "version": "1.0.0",
+    "engines": {
+        "vscode": "^1.47.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "keywords": [
+        "base64",
+        "viewer",
+        "decoder",
+        "encoder"
+    ],
+    "galleryBanner.color": "#004c8c",
+    "icon": "vscode-base64viewer.png",
+    "license": "SEE LICENSE IN LICENSE",
+    "homepage": "https://github.com/JasonMejane/vscode-base64viewer/blob/master/README.md",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/JasonMejane/vscode-base64viewer.git"
+    },
+    "bugs": {
+        "email": "jason.mejane@gmail.com",
+        "url": "https://github.com/JasonMejane/vscode-base64viewer/issues"
+    },
+    "activationEvents": [
+        "onCommand:base64viewer.decodeBase64",
+        "onCommand:base64viewer.encodeBase64"
+    ],
+    "main": "./out/extension.js",
+    "contributes": {
+        "commands": [
+            {
+                "command": "base64viewer.decodeBase64",
+                "title": "Base64Viewer: Decode from Base 64"
+            },
+            {
+                "command": "base64viewer.encodeBase64",
+                "title": "Base64Viewer: Encode to Base 64"
+            }
+        ]
+    },
+    "scripts": {
+        "vscode:prepublish": "webpack --mode production",
+        "compile": "tsc -p ./",
+        "lint": "eslint src --ext ts",
+        "pretest": "npm run compile && npm run lint",
+        "test": "node ./out/test/runTest.js",
+        "test-compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "webpack": "webpack --mode development",
+        "webpack-dev": "webpack --mode development --watch",
+        "package": "vsce package"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    "lint-staged": {
+        "*.{ts}": [
+            "eslint -c .eslintrc.json"
+        ],
+        "*.{ts,json,css,md}": [
+            "prettier --write"
+        ]
+    },
+    "dependencies": {
+        "mime": "2.4.6",
+        "pdfjs-dist": "2.4.456"
+    },
+    "devDependencies": {
+        "@types/glob": "^7.1.1",
+        "@types/mime": "^2.0.3",
+        "@types/mocha": "^7.0.2",
+        "@types/node": "^13.13.15",
+        "@types/pdfjs-dist": "^2.1.5",
+        "@types/vscode": "^1.47.0",
+        "@typescript-eslint/eslint-plugin": "^2.30.0",
+        "@typescript-eslint/parser": "^2.30.0",
+        "css-loader": "^4.0.0",
+        "eslint": "^6.8.0",
+        "glob": "^7.1.6",
+        "husky": "^4.2.5",
+        "lint-staged": "^10.2.11",
+        "mocha": "^7.1.2",
+        "pdfjs-dist": "2.4.456",
+        "prettier": "^2.0.5",
+        "style-loader": "^1.2.1",
+        "ts-loader": "^8.0.1",
+        "typescript": "^3.8.3",
+        "vscode-test": "^1.3.0",
+        "webpack": "^4.44.0",
+        "webpack-cli": "^3.3.12"
+    }
 }
