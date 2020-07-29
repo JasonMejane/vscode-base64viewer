@@ -7,39 +7,42 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   sodipodi:docname="vscode-base64viewer.svg"
-   inkscape:version="1.0 (6e3e5246a0, 2020-05-07)"
-   id="svg8"
+   inkscape:export-ydpi="96"
+   inkscape:export-xdpi="96"
+   inkscape:export-filename="/home/jason/Documents/Workspaces/vscode-extensions/Base64Viewer/base64viewer/vscode-base64viewer.png"
+   width="128"
+   height="128"
+   viewBox="0 0 128 128"
    version="1.1"
-   viewBox="0 0 64 64"
-   height="64"
-   width="64">
+   id="svg8"
+   inkscape:version="1.0 (6e3e5246a0, 2020-05-07)"
+   sodipodi:docname="vscode-base64viewer.svg">
   <defs
      id="defs2" />
   <sodipodi:namedview
-     inkscape:window-maximized="1"
-     inkscape:window-y="0"
-     inkscape:window-x="0"
-     inkscape:window-height="2091"
-     inkscape:window-width="3840"
-     units="px"
-     showgrid="true"
-     inkscape:document-rotation="0"
-     inkscape:current-layer="layer1"
-     inkscape:document-units="px"
-     inkscape:cy="35.157233"
-     inkscape:cx="20.241359"
-     inkscape:zoom="15"
-     inkscape:pageshadow="2"
-     inkscape:pageopacity="0.0"
-     borderopacity="1.0"
-     bordercolor="#666666"
+     id="base"
      pagecolor="#ffffff"
-     id="base">
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="11.313709"
+     inkscape:cx="54.951481"
+     inkscape:cy="61.736617"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="true"
+     units="px"
+     inkscape:window-width="3840"
+     inkscape:window-height="2091"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1">
     <inkscape:grid
-       enabled="false"
+       type="xygrid"
        id="grid18"
-       type="xygrid" />
+       enabled="true" />
   </sodipodi:namedview>
   <metadata
      id="metadata5">
@@ -54,36 +57,31 @@
     </rdf:RDF>
   </metadata>
   <g
-     id="layer1"
+     inkscape:label="Calque 1"
      inkscape:groupmode="layer"
-     inkscape:label="Calque 1">
+     id="layer1">
     <rect
-       y="0"
-       x="0"
-       height="64"
-       width="64"
+       style="fill:#303030;fill-opacity:1;stroke:none;stroke-width:4;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect845"
-       style="fill:#303030;stroke:none;stroke-width:2;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;fill-opacity:1" />
+       width="128"
+       height="128"
+       x="0"
+       y="0" />
     <path
-       sodipodi:nodetypes="cccccccccccccccc"
+       style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:sans-serif;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-variant-east-asian:normal;font-feature-settings:normal;font-variation-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;shape-margin:0;inline-size:0;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#eeeeee;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:4;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate;stop-color:#000000;stop-opacity:1"
+       d="M 22.095238,4 C 20.938118,4.0001162 20.000116,4.9426065 20,6.1052632 V 121.89474 c 1.16e-4,1.16265 0.938118,2.10514 2.095238,2.10526 h 83.809522 c 1.15712,-1.2e-4 2.09512,-0.94261 2.09524,-2.10526 V 27.157895 C 108,25.995238 86.109501,4 84.952381,4 Z m 2.095238,4.2105263 H 80.761905 V 31.368421 H 103.80952 V 119.78947 H 24.190476 Z"
        id="path855"
-       d="m 12,4 c -0.552262,5.52e-5 -0.999945,0.4477381 -1,1 v 55 c 5.5e-5,0.552262 0.447738,0.999945 1,1 h 40 c 0.552262,-5.5e-5 0.999945,-0.447738 1,-1 V 15 C 53,14.447738 42.552262,4 42,4 Z m 1,2 H 40 V 17 H 51 V 59 H 13 Z"
-       style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:sans-serif;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-variant-east-asian:normal;font-feature-settings:normal;font-variation-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;shape-margin:0;inline-size:0;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#eeeeee;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:2;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate;stop-color:#000000;stop-opacity:1" />
+       sodipodi:nodetypes="cccccccccccccccc" />
     <text
-       id="text865"
-       y="33.113956"
-       x="31.699856"
-       style="font-style:normal;font-weight:normal;font-size:40px;line-height:0.3;font-family:sans-serif;fill:#eeeeee;fill-opacity:1;stroke:none"
-       xml:space="preserve"><tspan
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.6667px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;text-anchor:middle;fill:#eeeeee;fill-opacity:1"
-         id="tspan867"
-         y="33.113956"
-         x="31.699856"
-         sodipodi:role="line">Base</tspan><tspan
-         id="tspan871"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.6667px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;text-anchor:middle;fill:#eeeeee;fill-opacity:1"
-         y="47.894684"
-         x="31.699856"
-         sodipodi:role="line">64</tspan></text>
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:45.3333px;line-height:1.3;font-family:sans-serif;fill:#eeeeee;fill-opacity:1;stroke:none"
+       x="63.990421"
+       y="83.06382"
+       id="text865"><tspan
+         sodipodi:role="line"
+         x="63.990421"
+         y="83.06382"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:45.3333px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;text-anchor:middle;fill:#eeeeee;fill-opacity:1"
+         id="tspan871">64</tspan></text>
   </g>
 </svg>

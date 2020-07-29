@@ -1,6 +1,11 @@
 .vscode
 node_modules
+demo/
 out/
 src/
 tsconfig.json
+vsc-extension-quickstart.md
+vscode-base64viewer.svg
 webpack.config.js
+.gitignore
+*.vslx

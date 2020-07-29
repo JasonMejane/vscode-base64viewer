@@ -1,4 +1,4 @@
-# base64viewer
+# Base64Viewer
 
 Decode Base64 strings and show the file, and encode files to base 64 strings.
 
