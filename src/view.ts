@@ -164,7 +164,6 @@ export class View {
                         <meta name="google" content="notranslate">
                         <meta http-equiv="X-UA-Compatible" content="IE=edge">
                         <title>Base 64 Viewer</title>
-                        <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src https:; script-src 'unsafe-eval' 'unsafe-inline' vscode-resource:; style-src vscode-resource: 'unsafe-inline';">
                         <script src="${resolveAsUri("lib", "pdfjs-dist", "pdf.js")}"></script>
                         <style>${this.style}</style>
                     </head>`;
@@ -266,7 +265,7 @@ export class View {
                                         });
                                     
                                         list.innerText = fileElementList;
-                                    });					
+                                    });
                                 });				
                             }
                         }
@@ -309,7 +308,6 @@ export class View {
                         <meta name="google" content="notranslate">
                         <meta http-equiv="X-UA-Compatible" content="IE=edge">
                         <title>Base 64 Viewer</title>
-                        <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src https:; script-src 'unsafe-eval' 'unsafe-inline' vscode-resource:; style-src vscode-resource: 'unsafe-inline';">
                         <style>${this.style}</style>
                     </head>`;
             body = `
@@ -336,7 +334,6 @@ export class View {
                         <meta name="google" content="notranslate">
                         <meta http-equiv="X-UA-Compatible" content="IE=edge">
                         <title>Base 64 Viewer</title>
-                        <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src https:; script-src 'unsafe-eval' 'unsafe-inline' vscode-resource:; style-src vscode-resource: 'unsafe-inline';">
                         <style>${this.style}</style>
                     </head>`;
             body = `
@@ -369,7 +366,6 @@ export class View {
                         <meta name="google" content="notranslate">
                         <meta http-equiv="X-UA-Compatible" content="IE=edge">
                         <title>Base 64 Viewer</title>
-                        <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src https:; script-src 'unsafe-eval' 'unsafe-inline' vscode-resource:; style-src vscode-resource: 'unsafe-inline';">
                         <style>${this.style}</style>
                     </head>`;
             body = `
@@ -411,7 +407,6 @@ export class View {
                         <meta name="google" content="notranslate">
                         <meta http-equiv="X-UA-Compatible" content="IE=edge">
                         <title>Base 64 Viewer</title>
-                        <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src https:; script-src 'unsafe-eval' 'unsafe-inline' vscode-resource:; style-src vscode-resource: 'unsafe-inline';">
                         <style>${this.style}</style>
                         <script src="${resolveAsUri("lib", "pdfjs-dist", "pdf.js")}"></script>
                     </head>`;
@@ -496,7 +491,6 @@ export class View {
                         <meta name="google" content="notranslate">
                         <meta http-equiv="X-UA-Compatible" content="IE=edge">
                         <title>Base 64 Viewer</title>
-                        <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src https:; script-src 'unsafe-eval' 'unsafe-inline' vscode-resource:; style-src vscode-resource: 'unsafe-inline';">
                         <style>${this.style}</style>
                     </head>`;
             body = `

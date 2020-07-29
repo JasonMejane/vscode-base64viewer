@@ -19,6 +19,20 @@ When encoding a pdf file, you can switch the view between the base 64 string and
 * `base64viewer.decodeBase64`: Show an input where you can paste the base64 string to decode
 * `base64viewer.encodeBase64`: Open a file selection dialog where you can choose a file to encode
 
+## Demos
+
+### Decoding
+
+![Decode PDF Demo](demo/base64Viewer-decode-pdf-demo.gif)
+
+![Decode Image Demo](demo/base64Viewer-decode-image-demo.gif)
+
+### Encoding
+
+![Encode PDF Demo](demo/base64Viewer-encode-pdf-demo.gif)
+
+![Encode Image Demo](demo/base64Viewer-encode-image-demo.gif)
+
 ## Known Issues
 
 No known issue
