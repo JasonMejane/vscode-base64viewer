@@ -1,7 +1,7 @@
 {
     "name": "base64viewer",
     "displayName": "Base64Viewer",
-    "description": "Easy to use base 64 decoder/encoder and viewer",
+    "description": "Easy to use Base64 decoder/encoder and viewer",
     "publisher": "JasonMejane",
     "version": "1.0.0",
     "engines": {
@@ -32,16 +32,16 @@
         "onCommand:base64viewer.decodeBase64",
         "onCommand:base64viewer.encodeBase64"
     ],
-    "main": "./out/extension.js",
+    "main": "./dist/extension.js",
     "contributes": {
         "commands": [
             {
                 "command": "base64viewer.decodeBase64",
-                "title": "Base64Viewer: Decode from Base 64"
+                "title": "Base64Viewer: Decode from Base64"
             },
             {
                 "command": "base64viewer.encodeBase64",
-                "title": "Base64Viewer: Encode to Base 64"
+                "title": "Base64Viewer: Encode to Base64"
             }
         ]
     },

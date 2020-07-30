@@ -2,4 +2,5 @@ dist
 out
 node_modules
 .vscode-test/
+vsc-extension-quickstart.md
 *.vsix

@@ -1,6 +1,6 @@
-import * as vscode from "vscode";
-import * as path from "path";
-import { Base64Utils } from "./base64utils";
+import * as vscode from 'vscode';
+import * as path from 'path';
+import { Base64Utils } from './base64utils';
 
 export class View {
     private style = `
@@ -128,23 +128,45 @@ export class View {
     }
     `;
 
-    public createView(extensionRoot: vscode.Uri, target: string, mimeType: string, viewType: string, filePath?: string) {
+    public createView(
+        extensionRoot: vscode.Uri,
+        target: string,
+        mimeType: string,
+        viewType: string,
+        filePath?: string,
+    ) {
         // Create and show panel
-        var webviewPanel = vscode.window.createWebviewPanel("base64viewer", "Base64 Viewer", vscode.ViewColumn.Two, {});
+        var webviewPanel = vscode.window.createWebviewPanel('base64viewer', 'Base64 Viewer', vscode.ViewColumn.Two, {});
         webviewPanel.webview.options = {
             enableScripts: true,
         };
 
-        if (viewType === "decoding") {
-            webviewPanel.webview.html = this.initWebviewDecodingContent(extensionRoot, webviewPanel.webview, target, mimeType);
-        } else if (viewType === "encoding") {
-            webviewPanel.webview.html = this.initWebviewEncodingContent(extensionRoot, webviewPanel.webview, target, mimeType, filePath || "");
+        if (viewType === 'decoding') {
+            webviewPanel.webview.html = this.initWebviewDecodingContent(
+                extensionRoot,
+                webviewPanel.webview,
+                target,
+                mimeType,
+            );
+        } else if (viewType === 'encoding') {
+            webviewPanel.webview.html = this.initWebviewEncodingContent(
+                extensionRoot,
+                webviewPanel.webview,
+                target,
+                mimeType,
+                filePath || '',
+            );
         }
     }
 
-    private initWebviewDecodingContent(extensionRoot: vscode.Uri, webview: vscode.Webview, base64String: string, mimeType: string): string {
+    private initWebviewDecodingContent(
+        extensionRoot: vscode.Uri,
+        webview: vscode.Webview,
+        base64String: string,
+        mimeType: string,
+    ): string {
         const b64u = new Base64Utils();
-        const spacer = "  |  ";
+        const spacer = '  |  ';
         const resolveAsUri = (...p: string[]): vscode.Uri => {
             const uri = vscode.Uri.file(path.join(extensionRoot.path, ...p));
             return webview.asWebviewUri(uri);
@@ -154,7 +176,7 @@ export class View {
         let head = ``;
         let body = ``;
 
-        if (mimeType === "application/pdf") {
+        if (mimeType === 'application/pdf') {
             head = `
                 <!DOCTYPE html>
                 <html dir="ltr" mozdisallowselectionprint>
@@ -164,7 +186,7 @@ export class View {
                         <meta name="google" content="notranslate">
                         <meta http-equiv="X-UA-Compatible" content="IE=edge">
                         <title>Base 64 Viewer</title>
-                        <script src="${resolveAsUri("lib", "pdfjs-dist", "pdf.js")}"></script>
+                        <script src="${resolveAsUri('lib', 'pdfjs-dist', 'pdf.js')}"></script>
                         <style>${this.style}</style>
                     </head>`;
             body = `
@@ -206,7 +228,11 @@ export class View {
                     <script>
                         var pdfData = atob('${base64String}');
                         var pdfjsLib = window['pdfjs-dist/build/pdf'];
-                        pdfjsLib.GlobalWorkerOptions.workerSrc = '${resolveAsUri("lib", "pdfjs-dist", "pdf.worker.js")}';
+                        pdfjsLib.GlobalWorkerOptions.workerSrc = '${resolveAsUri(
+                            'lib',
+                            'pdfjs-dist',
+                            'pdf.worker.js',
+                        )}';
             
                         var loadingTask = pdfjsLib.getDocument({data: pdfData});
 
@@ -298,7 +324,7 @@ export class View {
                     </script>
                 </body>
             </html>`;
-        } else if (mimeType.includes("image")) {
+        } else if (mimeType.includes('image')) {
             head = `
                 <!DOCTYPE html>
                 <html dir="ltr" mozdisallowselectionprint>
@@ -324,7 +350,7 @@ export class View {
                     </div>
                 </body>
             </html>`;
-        } else if (mimeType.includes("text")) {
+        } else if (mimeType.includes('text')) {
             head = `
                 <!DOCTYPE html>
                 <html dir="ltr" mozdisallowselectionprint>
@@ -377,7 +403,7 @@ export class View {
                     <div class="page-content">
                         <h3>${mimeType}  (${fileSize})</h3>
                         <div class="content">
-                            <h2>Unsupported format!</h2>
+                            <h2>This format can't be displayed!</h2>
                         </div>
                     </div>
                 </body>
@@ -387,8 +413,14 @@ export class View {
         return head + body;
     }
 
-    private initWebviewEncodingContent(extensionRoot: vscode.Uri, webview: vscode.Webview, content: string, mimeType: string, filePath: string): string {
-        const spacer = "  |  ";
+    private initWebviewEncodingContent(
+        extensionRoot: vscode.Uri,
+        webview: vscode.Webview,
+        content: string,
+        mimeType: string,
+        filePath: string,
+    ): string {
+        const spacer = '  |  ';
         const resolveAsUri = (...p: string[]): vscode.Uri => {
             const uri = vscode.Uri.file(path.join(extensionRoot.path, ...p));
             return webview.asWebviewUri(uri);
@@ -397,7 +429,7 @@ export class View {
         let head = ``;
         let body = ``;
 
-        if (mimeType === "application/pdf") {
+        if (mimeType === 'application/pdf') {
             head = `
                 <!DOCTYPE html>
                 <html dir="ltr" mozdisallowselectionprint>
@@ -408,7 +440,7 @@ export class View {
                         <meta http-equiv="X-UA-Compatible" content="IE=edge">
                         <title>Base 64 Viewer</title>
                         <style>${this.style}</style>
-                        <script src="${resolveAsUri("lib", "pdfjs-dist", "pdf.js")}"></script>
+                        <script src="${resolveAsUri('lib', 'pdfjs-dist', 'pdf.js')}"></script>
                     </head>`;
             body = `
                 <body>
@@ -430,7 +462,11 @@ export class View {
 
                         var pdfData = atob('${content}');
                         var pdfjsLib = window['pdfjs-dist/build/pdf'];
-                        pdfjsLib.GlobalWorkerOptions.workerSrc = '${resolveAsUri("lib", "pdfjs-dist", "pdf.worker.js")}';
+                        pdfjsLib.GlobalWorkerOptions.workerSrc = '${resolveAsUri(
+                            'lib',
+                            'pdfjs-dist',
+                            'pdf.worker.js',
+                        )}';
             
                         var loadingTask = pdfjsLib.getDocument({data: pdfData});
             
