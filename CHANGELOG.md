@@ -31,7 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Fixed document opening on Windows (PR #1 - Issue #2)
-- Typos (including Issue #3)
+- Typos and indentation (including Issue #3)
 
 ### Removed
 
