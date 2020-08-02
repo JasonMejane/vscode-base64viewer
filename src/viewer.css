@@ -30,6 +30,8 @@ h3 {
 
 .content {
 	border-top: #909090 solid 1px;
+	display: flex;
+	justify-content: center;
 	margin: 4px;
 	padding: 4px 0;
 }

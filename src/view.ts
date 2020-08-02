@@ -35,6 +35,8 @@ export class View {
     
     .content {
         border-top: #909090 solid 1px;
+        display: flex;
+        justify-content: center;
         margin: 4px;
         padding: 4px 0;
     }
@@ -218,9 +220,15 @@ export class View {
                         </div>
             
                         <div>
-                            <h3>Ordered PDF Elements</h3>
-                            <div class="content">
-                                <code id="pdfElementList"></code>
+                            <div>
+                                <h3>Ordered PDF Text Elements</h3>
+                                <div class="content">
+                                    <code id="pdfTextElementsList"></code>
+                                </div>
+                            </div>
+                            <div>
+                                <h3>Ordered PDF Images</h3>
+                                <div class="content" id="pdfImagesList"></div>
                             </div>
                         </div>
                     </div>
@@ -254,7 +262,7 @@ export class View {
                             renderPage(pdf, pageNumber);
                         
                             // Parsing the pdf page by page
-                            parsePdf(pdf);                            
+                            parsePdf(pdf);
                         }, function (reason) {
                             // PDF loading error
                             console.error("Error: " + reason);
@@ -272,26 +280,53 @@ export class View {
                             renderPage(pdf, pageNumber);
                         }
                         
+                        function extractImagesInPage(page) {
+                            const scale = 1.5;
+                            const viewport = page.getViewport({scale: scale});
+
+                            page.getOperatorList().then(function(opList) {
+                                var svgGfx = new pdfjsLib.SVGGraphics(page.commonObjs, page.objs);
+                                return svgGfx.getSVG(opList, viewport);
+                            }).then(function(svg) {
+                                var pageSvgString = new XMLSerializer().serializeToString(svg);
+                                var cutSvg = pageSvgString.split('<svg:image ');
+                                for (var i=0; i < cutSvg.length; i++) {
+                                    var recut = cutSvg[i+1].split('/>');
+                                    var blob = recut[0].split('href="');
+                                    blob = blob[1].split('"');
+                                    var svgSrc = blob[0];
+
+                                    var img = document.createElement("IMG");
+                                    img.setAttribute('src', svgSrc)
+                                    img.setAttribute('width', '80%');
+                                    document.getElementById('pdfImagesList').appendChild(img);
+                                }
+                            });	
+                        }
+                        
+                        function extractTextInPage(page, htmlList) {
+                            page.getTextContent().then(function(tokenizedText) {
+                                var textElementsList = "";
+                                var pageContent = tokenizedText.items.map(token => token.str);
+                            
+                                pageContent.forEach(function(textElement) {
+                                    textElement = textElement.trim();
+                                
+                                    if (textElement !== '') {
+                                        textElementsList = textElementsList + textElement + '${spacer}';
+                                    }
+                                });
+
+                                htmlList.innerText = htmlList.innerText + textElementsList;
+                            });
+                        }
+                        
                         function parsePdf(pdf) {
-                            var fileElementList = "";
-                            var list = document.getElementById('pdfElementList');
+                            var pdfTextElementsList = document.getElementById('pdfTextElementsList');
                             for (let i = 0; i < pdf.numPages; i++) {                            
                                 pdf.getPage(i + 1).then(function(page) {
-                                    let pageContent;
-                                
-                                    page.getTextContent().then(function(tokenizedText) {
-                                        pageContent = tokenizedText.items.map(token => token.str);
-                                    
-                                        pageContent.forEach(function(textElement) {
-                                            textElement = textElement.trim();
-                                        
-                                            if (textElement !== '') {
-                                                fileElementList = fileElementList + textElement + '${spacer}';
-                                            }
-                                        });
-                                    
-                                        list.innerText = fileElementList;
-                                    });
+                                    extractTextInPage(page, pdfTextElementsList);
+                                    extractImagesInPage(page);
                                 });				
                             }
                         }
@@ -451,14 +486,18 @@ export class View {
                     <div class="page-content">
                         <h3>${mimeType} ${filePath}</h3>
                         <div class="content encoded-content">
-                            <button id="switchButton" onclick="switchContent()">Switch to Ordered PDF Elements</button>
+                            <button id="switchButton" onclick="switchContent()">Switch to Ordered PDF Text Elements</button>
                             <code id="code-tag">${content}</code>
+                            <br/>
+                            <details id="pdfImagesList">
+                                <summary>PDF Images List</summary>
+                            </details>
                         </div>
                     </div>
 
                     <script>
                         var displayed = "content";
-                        var elementList = "";
+                        var textElementsList = "";
 
                         var pdfData = atob('${content}');
                         var pdfjsLib = window['pdfjs-dist/build/pdf'];
@@ -476,26 +515,51 @@ export class View {
                             // PDF loading error
                             console.error("Error: " + reason);
                         });
+                        
+                        function extractImagesInPage(page) {
+                            const scale = 1.5;
+                            const viewport = page.getViewport({scale: scale});
 
+                            page.getOperatorList().then(function(opList) {
+                                var svgGfx = new pdfjsLib.SVGGraphics(page.commonObjs, page.objs);
+                                return svgGfx.getSVG(opList, viewport);
+                            }).then(function(svg) {
+                                var pageSvgString = new XMLSerializer().serializeToString(svg);
+                                var cutSvg = pageSvgString.split('<svg:image ');
+                                for (var i=0; i < cutSvg.length; i++) {
+                                    var recut = cutSvg[i+1].split('/>');
+                                    var blob = recut[0].split('href="');
+                                    blob = blob[1].split('"');
+                                    var svgSrc = blob[0];
+
+                                    var img = document.createElement("IMG");
+                                    img.setAttribute('src', svgSrc)
+                                    img.setAttribute('width', '80%');
+                                    document.getElementById('pdfImagesList').appendChild(img);
+                                }
+                            });	
+                        }
+                        
+                        function extractTextInPage(page, htmlList) {
+                            page.getTextContent().then(function(tokenizedText) {
+                                var pageContent = tokenizedText.items.map(token => token.str);
+                            
+                                pageContent.forEach(function(textElement) {
+                                    textElement = textElement.trim();
+                                
+                                    if (textElement !== '') {
+                                        textElementsList = textElementsList + textElement + '${spacer}';
+                                    }
+                                });
+                            });
+                        }
+                        
                         function parsePdf(pdf) {
-                            var fileElementList = "";
+                            var pdfTextElementsList = document.getElementById('pdfTextElementsList');
                             for (let i = 0; i < pdf.numPages; i++) {                            
                                 pdf.getPage(i + 1).then(function(page) {
-                                    let pageContent;
-                                
-                                    page.getTextContent().then(function(tokenizedText) {
-                                        pageContent = tokenizedText.items.map(token => token.str);
-                                    
-                                        pageContent.forEach(function(textElement) {
-                                            textElement = textElement.trim();
-                                        
-                                            if (textElement !== '') {
-                                                fileElementList = fileElementList + textElement + '${spacer}';
-                                            }
-                                        });
-                                    
-                                        elementList = fileElementList;
-                                    });					
+                                    extractTextInPage(page, pdfTextElementsList);
+                                    extractImagesInPage(page);
                                 });				
                             }
                         }
@@ -505,13 +569,13 @@ export class View {
                             var switchButton = document.getElementById('switchButton');
 
                             if (displayed === "content") {
-                                codeTag.innerText = elementList;
-                                displayed = "elementList";
+                                codeTag.innerText = textElementsList;
+                                displayed = "textElementsList";
                                 switchButton.innerText = "Switch to Base64 Encoded File";
                             } else {
                                 codeTag.innerText = '${content}';
                                 displayed = "content";
-                                switchButton.innerText = "Switch to Ordered PDF Elements";
+                                switchButton.innerText = "Switch to Ordered PDF Text Elements";
                             }
                         }
                     </script>
