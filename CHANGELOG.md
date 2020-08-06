@@ -37,3 +37,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - unused tasks.json (PR #1)
 - vsc-extension-quickstart.md (PR #1)
+
+## [1.2.0] - 2020-08-
+
+### Added
+
+- Extraction of images inside a PDF file
+- i18n support (English and French for now) using custom localization class
