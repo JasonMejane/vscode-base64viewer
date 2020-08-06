@@ -4,16 +4,19 @@ import * as fs from 'fs';
 import * as mime from 'mime';
 import * as vscode from 'vscode';
 import { Base64Utils } from './base64utils';
+import { Localizer } from './localizer';
 import { View } from './view';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
 	const extensionRoot = vscode.Uri.file(context.extensionPath);
+	let localizer = new Localizer();
+	const messages = localizer.getLocalizedMessages();
 
 	// Register commands
 	let disposable = vscode.commands.registerCommand('base64viewer.decodeBase64', () => {
-		vscode.window.showInputBox({ prompt: 'Enter the Base64 string to decode' }).then(
+		vscode.window.showInputBox({ prompt: messages.general.prompt.decode }).then(
 			(base64String) => decodeAndDisplay(extensionRoot, base64String),
 			(reason) => showErrorPopup(reason),
 		);
@@ -26,7 +29,7 @@ export function activate(context: vscode.ExtensionContext) {
 				canSelectFiles: true,
 				canSelectFolders: false,
 				canSelectMany: false,
-				title: 'Choose the file you want to encode to a Base 64 string...',
+				title: messages.general.prompt.encode,
 			})
 			.then(
 				(uri) => encodeAndDisplay(extensionRoot, uri),
@@ -40,6 +43,9 @@ export function activate(context: vscode.ExtensionContext) {
 export function deactivate() {}
 
 function decodeAndDisplay(extensionRoot: vscode.Uri, base64String: any) {
+	let localizer = new Localizer();
+	const messages = localizer.getLocalizedMessages();
+
 	if (base64String !== undefined) {
 		let b64u = new Base64Utils();
 		let v = new View();
@@ -49,28 +55,30 @@ function decodeAndDisplay(extensionRoot: vscode.Uri, base64String: any) {
 			v.createView(extensionRoot, decodedString, mimeType, 'decoding');
 		});
 	} else {
-		showErrorPopup('Operation cancelled');
+		showErrorPopup(messages.general.operationCancelled);
 	}
 }
 
 async function encodeAndDisplay(extensionRoot: vscode.Uri, uris: vscode.Uri[] | undefined) {
+	let localizer = new Localizer();
+	const messages = localizer.getLocalizedMessages();
+
 	if (uris !== undefined) {
-		let b64u = new Base64Utils();
 		let v = new View();
 
 		const uri = uris[0];
 		const filePath = uri.fsPath;
 
-		const fileMime = mime.getType(filePath) || 'Unknown';
+		const fileMime = mime.getType(filePath) || messages.general.unknownType;
 
 		fs.readFile(filePath, { encoding: 'base64' }, (err, data) => {
 			if (err) {
 				throw err;
 			}
-			v.createView(extensionRoot, data, fileMime, 'encoding', '(' + filePath + ')');
+			v.createView(extensionRoot, data, fileMime, 'encoding', filePath);
 		});
 	} else {
-		showErrorPopup('Operation cancelled');
+		showErrorPopup(messages.general.operationCancelled);
 	}
 }
 

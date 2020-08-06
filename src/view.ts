@@ -1,8 +1,10 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Base64Utils } from './base64utils';
+import { Localizer } from './localizer';
 
 export class View {
+	private messages: any;
 	private style = `
     body {
         background-color: #1e1e1e;
@@ -130,6 +132,11 @@ export class View {
     }
     `;
 
+	constructor() {
+		let localizer = new Localizer();
+		this.messages = localizer.getLocalizedMessages();
+	}
+
 	public createView(
 		extensionRoot: vscode.Uri,
 		target: string,
@@ -187,14 +194,14 @@ export class View {
                         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
                         <meta name="google" content="notranslate">
                         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-                        <title>Base 64 Viewer</title>
+                        <title>${this.messages.general.title}</title>
                         <script src="${resolveAsUri('lib', 'pdfjs-dist', 'pdf.js')}"></script>
                         <style>${this.style}</style>
                     </head>`;
 			body = `
                 <body>
                     <div class="title-bar">
-                        <h1>Base 64 Viewer</h1>
+                        <h1>${this.messages.general.title}</h1>
                     </div>
             
                     <div class="page-content two-col">
@@ -207,7 +214,9 @@ export class View {
                                     <div class="page-nav">
                                         <button onclick="changePage(loadedPdf, currentPage, 'prev')"><</button>
                                         <span>
-                                            Page <span id="currentPage"></span> / <span id="totalPage"></span>
+                                        ${
+											this.messages.pdf.page
+										} : <span id="currentPage"></span> / <span id="totalPage"></span>
                                         </span>
                                         <button onclick="changePage(loadedPdf, currentPage, 'next')">></button>
                                     </div>
@@ -221,13 +230,13 @@ export class View {
             
                         <div>
                             <div>
-                                <h3>Ordered PDF Text Elements</h3>
+                                <h3>${this.messages.pdf.orderedElements.text.title}</h3>
                                 <div class="content">
                                     <code id="pdfTextElementsList"></code>
                                 </div>
                             </div>
                             <div>
-                                <h3>Ordered PDF Images</h3>
+                                <h3>${this.messages.pdf.orderedElements.images.title}</h3>
                                 <div class="content" id="pdfImagesList"></div>
                             </div>
                         </div>
@@ -368,13 +377,13 @@ export class View {
                         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
                         <meta name="google" content="notranslate">
                         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-                        <title>Base 64 Viewer</title>
+                        <title>${this.messages.general.title}</title>
                         <style>${this.style}</style>
                     </head>`;
 			body = `
                 <body>
                     <div class="title-bar">
-                        <h1>Base 64 Viewer</h1>
+                        <h1>${this.messages.general.title}</h1>
                     </div>
             
                     <div class="page-content">
@@ -394,13 +403,13 @@ export class View {
                         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
                         <meta name="google" content="notranslate">
                         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-                        <title>Base 64 Viewer</title>
+                        <title>${this.messages.general.title}</title>
                         <style>${this.style}</style>
                     </head>`;
 			body = `
                 <body>
                     <div class="title-bar">
-                        <h1>Base 64 Viewer</h1>
+                        <h1>${this.messages.general.title}</h1>
                     </div>
             
                     <div class="page-content">
@@ -426,19 +435,19 @@ export class View {
                         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
                         <meta name="google" content="notranslate">
                         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-                        <title>Base 64 Viewer</title>
+                        <title>${this.messages.general.title}</title>
                         <style>${this.style}</style>
                     </head>`;
 			body = `
                 <body>
                     <div class="title-bar">
-                        <h1>Base 64 Viewer</h1>
+                        <h1>${this.messages.general.title}</h1>
                     </div>
             
                     <div class="page-content">
                         <h3>${mimeType}  (${fileSize})</h3>
                         <div class="content">
-                            <h2>This format can't be displayed!</h2>
+                            <h2>${this.messages.general.cantDisplayContent}</h2>
                         </div>
                     </div>
                 </body>
@@ -473,24 +482,26 @@ export class View {
                         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
                         <meta name="google" content="notranslate">
                         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-                        <title>Base 64 Viewer</title>
+                        <title>${this.messages.general.title}</title>
                         <style>${this.style}</style>
                         <script src="${resolveAsUri('lib', 'pdfjs-dist', 'pdf.js')}"></script>
                     </head>`;
 			body = `
                 <body>
                     <div class="title-bar">
-                        <h1>Base 64 Viewer</h1>
+                        <h1>${this.messages.general.title}</h1>
                     </div>
             
                     <div class="page-content">
-                        <h3>${mimeType} ${filePath}</h3>
+                        <h3>${filePath}<br/><br/>${mimeType}</h3>
                         <div class="content encoded-content">
-                            <button id="switchButton" onclick="switchContent()">Switch to Ordered PDF Text Elements</button>
+                            <button id="switchButton" onclick="switchContent()">${
+								this.messages.pdf.orderedElements.text.button
+							}</button>
                             <code id="code-tag">${content}</code>
                             <br/>
                             <details id="pdfImagesList">
-                                <summary>PDF Images List</summary>
+                                <summary>${this.messages.pdf.orderedElements.images.title}</summary>
                             </details>
                         </div>
                     </div>
@@ -571,11 +582,11 @@ export class View {
                             if (displayed === "content") {
                                 codeTag.innerText = textElementsList;
                                 displayed = "textElementsList";
-                                switchButton.innerText = "Switch to Base64 Encoded File";
+                                switchButton.innerText = "${this.messages.pdf.encodedString.button}";
                             } else {
                                 codeTag.innerText = '${content}';
                                 displayed = "content";
-                                switchButton.innerText = "Switch to Ordered PDF Text Elements";
+                                switchButton.innerText = "${this.messages.pdf.orderedElements.text.button}";
                             }
                         }
                     </script>
@@ -590,17 +601,17 @@ export class View {
                         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
                         <meta name="google" content="notranslate">
                         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-                        <title>Base 64 Viewer</title>
+                        <title>${this.messages.general.title}</title>
                         <style>${this.style}</style>
                     </head>`;
 			body = `
                 <body>
                     <div class="title-bar">
-                        <h1>Base 64 Viewer</h1>
+                        <h1>${this.messages.general.title}</h1>
                     </div>
             
                     <div class="page-content">
-                        <h3>${mimeType} ${filePath}</h3>
+                        <h3>${filePath}<br/><br/>${mimeType}</h3>
                         <div class="content">
                             <code id="code-tag">${content}</code>
                         </div>

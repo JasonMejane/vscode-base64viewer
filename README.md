@@ -14,12 +14,12 @@ You can decode Base64 strings corresponding to :
 
 Other formats might be added in the future.
 
-When the Base64 string corresponds to a PDF file, a second column, next to the PDF viewer, is added, showing all text elements found in the PDF file.
+When the Base64 string corresponds to a PDF file, a second column, next to the PDF viewer, is added, showing all text elements and images found in the PDF file.
 
 ### Base64 Encoding
 
 You can encode any file to a Base64 string.
-When encoding a PDF file, you can switch the view between the Base64 string and a list of text elements found in the file.
+When encoding a PDF file, you can switch the view between the Base64 string and a list of text elements and images found in the file.
 
 ## Extension Settings
 
@@ -27,6 +27,8 @@ Two commands are available (access them using the command pallete: `Ctrl+Shift+P
 
 - `base64viewer.decodeBase64`: Show an input where you can paste the Base64 string to decode
 - `base64viewer.encodeBase64`: Open a file selection dialog where you can choose a file to encode
+
+The extension supports English and French languages, based on your VSCode set language. More languages might be added in the future.
 
 ## Demos
 
