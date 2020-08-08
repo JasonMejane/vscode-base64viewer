@@ -20,6 +20,7 @@ When the Base64 string corresponds to a PDF file, a second column, next to the P
 
 You can encode any file to a Base64 string.
 When encoding a PDF file, you can switch the view between the Base64 string and a list of text elements and images found in the file.
+The Base64 string can easily be used by copying it to your clipboard with the click of a button.
 
 ## Extension Settings
 

@@ -44,3 +44,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Extraction of images inside a PDF file
 - i18n support (English and French for now) using custom localization class
+- XSS sanitizing on user inputs
+- Copy Base64 string to clipboard after encoding a file
+
+### Changed
+
+- Minor code refactoring
+- Minor style changes

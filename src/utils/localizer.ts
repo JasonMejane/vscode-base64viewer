@@ -1,11 +1,15 @@
-import * as vscode from 'vscode';
-
 export class Localizer {
 	availableLangs: Array<string> = ['en', 'fr'];
 	messages: any = {
 		en: {
 			general: {
 				cantDisplayContent: "This format can't be displayed!",
+				copiedToClipboard: 'Base64 string copied to clipboard!',
+				copyButton: 'Copy to clipboard',
+				fileSave: {
+					error: 'Error while saving the file',
+					success: 'File successfully saved',
+				},
 				operationCancelled: 'Operation cancelled!',
 				prompt: {
 					decode: 'Enter the Base64 string to decode',
@@ -33,6 +37,12 @@ export class Localizer {
 		fr: {
 			general: {
 				cantDisplayContent: 'Ce contenu ne peut pas être affiché !',
+				copiedToClipboard: 'Chaîne Base64 copiée dans le presse-papier !',
+				copyButton: 'Copier dans le presse-papier',
+				fileSave: {
+					error: 'Erreur lors de la sauvegarde du fichier',
+					success: 'Fichier sauvegardé avec succès',
+				},
 				operationCancelled: 'Opération annulée !',
 				prompt: {
 					decode: 'Entrez la chaîne Base64 à décoder',

@@ -3,9 +3,9 @@
 import * as fs from 'fs';
 import * as mime from 'mime';
 import * as vscode from 'vscode';
-import { Base64Utils } from './base64utils';
-import { Localizer } from './localizer';
-import { View } from './view';
+import { Base64Utils } from './utils/base64utils';
+import { Localizer } from './utils/localizer';
+import { View } from './utils/view';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -13,17 +13,18 @@ export function activate(context: vscode.ExtensionContext) {
 	const extensionRoot = vscode.Uri.file(context.extensionPath);
 	let localizer = new Localizer();
 	const messages = localizer.getLocalizedMessages();
+	const xss = require('xss');
 
 	// Register commands
-	let disposable = vscode.commands.registerCommand('base64viewer.decodeBase64', () => {
+	let command = vscode.commands.registerCommand('base64viewer.decodeBase64', () => {
 		vscode.window.showInputBox({ prompt: messages.general.prompt.decode }).then(
-			(base64String) => decodeAndDisplay(extensionRoot, base64String),
+			(base64String) => decodeAndDisplay(extensionRoot, xss(base64String)),
 			(reason) => showErrorPopup(reason),
 		);
 	});
-	context.subscriptions.push(disposable);
+	context.subscriptions.push(command);
 
-	disposable = vscode.commands.registerCommand('base64viewer.encodeBase64', () => {
+	command = vscode.commands.registerCommand('base64viewer.encodeBase64', () => {
 		vscode.window
 			.showOpenDialog({
 				canSelectFiles: true,
@@ -36,7 +37,7 @@ export function activate(context: vscode.ExtensionContext) {
 				(reason) => showErrorPopup(reason),
 			);
 	});
-	context.subscriptions.push(disposable);
+	context.subscriptions.push(command);
 }
 
 // this method is called when your extension is deactivated

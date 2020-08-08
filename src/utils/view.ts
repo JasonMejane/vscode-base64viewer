@@ -1,7 +1,9 @@
-import * as vscode from 'vscode';
+import * as fs from 'fs';
 import * as path from 'path';
+import * as vscode from 'vscode';
 import { Base64Utils } from './base64utils';
 import { Localizer } from './localizer';
+import { MimeTypes } from './mimeTypes';
 
 export class View {
 	private messages: any;
@@ -33,6 +35,12 @@ export class View {
         text-align: center;
         vertical-align: middle;
         width: 100%;
+    }
+
+    .button-bar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     
     .content {
@@ -68,19 +76,16 @@ export class View {
         align-items: center;
     }
     
-    .page-nav > button {
-        margin: 0 12px;
-    }
-    
     .pdf-content {
         border-top: #909090 solid 1px;
         margin-top: 4px;
-        padding: 4px 0;
+        padding: 0;
     }
     
     .pdf-navbar {
         background-color: #454545;
         display: flex;
+        font-size: 1.1em;
         justify-content: space-between;
         padding: 8px;
     }
@@ -88,10 +93,10 @@ export class View {
     .pdf-navbar button {
         background-color: #303030;
         border: #dddddd solid 1px;
-        border-radius: 4px;
         color: #dddddd;
         font-weight: bold;
-        padding: 4px 8px;
+        padding: 6px 10px;
+        margin: 0 16px;
     }
     
     .spacer {
@@ -121,14 +126,14 @@ export class View {
         flex-grow: 1;
     }
     
-    #switchButton {
+    #switchButton, #copyButton {
         background-color: #303030;
-        border: #ffffff solid 1px;
-        border-radius: 4px;
-        color: #ffffff;
+        border: #dddddd solid 1px;
+        color: #dddddd;
+        font-size: 1.1em;
+        margin: 8px 12px;
         max-width: fit-content;
-        margin: 4px;
-        padding: 4px;
+        padding: 8px;
     }
     `;
 
@@ -150,6 +155,22 @@ export class View {
 			enableScripts: true,
 		};
 
+		// Clean resources
+		webviewPanel.onDidDispose(() => {
+			webviewPanel.dispose();
+		});
+
+		// Handle messages from the webview
+		webviewPanel.webview.onDidReceiveMessage((message) => {
+			if (message.command === 'copy') {
+				this.copyToClipboard(message.text);
+				return;
+			} else if (message.command === 'save') {
+				this.saveDecodedFile(message.mimeType, message.text);
+				return;
+			}
+		});
+
 		if (viewType === 'decoding') {
 			webviewPanel.webview.html = this.initWebviewDecodingContent(
 				extensionRoot,
@@ -168,6 +189,21 @@ export class View {
 		}
 	}
 
+	private copyToClipboard(text: string) {
+		vscode.env.clipboard.writeText(text).then(() => {
+			this.showInformationPopup(this.messages.general.copiedToClipboard);
+		});
+	}
+
+	private getNonce() {
+		let text = '';
+		const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+		for (let i = 0; i < 32; i++) {
+			text += possible.charAt(Math.floor(Math.random() * possible.length));
+		}
+		return text;
+	}
+
 	private initWebviewDecodingContent(
 		extensionRoot: vscode.Uri,
 		webview: vscode.Webview,
@@ -175,6 +211,7 @@ export class View {
 		mimeType: string,
 	): string {
 		const b64u = new Base64Utils();
+		const nonce = this.getNonce();
 		const spacer = '  |  ';
 		const resolveAsUri = (...p: string[]): vscode.Uri => {
 			const uri = vscode.Uri.file(path.join(extensionRoot.path, ...p));
@@ -195,7 +232,7 @@ export class View {
                         <meta name="google" content="notranslate">
                         <meta http-equiv="X-UA-Compatible" content="IE=edge">
                         <title>${this.messages.general.title}</title>
-                        <script src="${resolveAsUri('lib', 'pdfjs-dist', 'pdf.js')}"></script>
+                        <script nonce="${nonce}" src="${resolveAsUri('lib', 'pdfjs-dist', 'pdf.js')}"></script>
                         <style>${this.style}</style>
                     </head>`;
 			body = `
@@ -242,7 +279,9 @@ export class View {
                         </div>
                     </div>
             
-                    <script>
+                    <script nonce="${nonce}" src="${resolveAsUri('src', 'assets', 'postMsg.js')}"></script>
+            
+                    <script nonce="${nonce}">
                         var pdfData = atob('${base64String}');
                         var pdfjsLib = window['pdfjs-dist/build/pdf'];
                         pdfjsLib.GlobalWorkerOptions.workerSrc = '${resolveAsUri(
@@ -392,6 +431,8 @@ export class View {
                             <img src="data:${mimeType};base64,${base64String}"/>
                         </div>
                     </div>
+            
+                    <script nonce="${nonce}" src="${resolveAsUri('src', 'assets', 'postMsg.js')}"></script>
                 </body>
             </html>`;
 		} else if (mimeType.includes('text')) {
@@ -418,8 +459,10 @@ export class View {
                             <code id="code-tag"></code>
                         </div>
                     </div>
+            
+                    <script nonce="${nonce}" src="${resolveAsUri('src', 'assets', 'postMsg.js')}"></script>
                         
-                    <script>
+                    <script nonce="${nonce}">
                         var text = atob('${base64String}');
                         var codeTag = document.getElementById('code-tag');
                         codeTag.innerText = text;
@@ -450,6 +493,8 @@ export class View {
                             <h2>${this.messages.general.cantDisplayContent}</h2>
                         </div>
                     </div>
+            
+                    <script nonce="${nonce}" src="${resolveAsUri('src', 'assets', 'postMsg.js')}"></script>
                 </body>
             </html>`;
 		}
@@ -464,6 +509,7 @@ export class View {
 		mimeType: string,
 		filePath: string,
 	): string {
+		const nonce = this.getNonce();
 		const spacer = '  |  ';
 		const resolveAsUri = (...p: string[]): vscode.Uri => {
 			const uri = vscode.Uri.file(path.join(extensionRoot.path, ...p));
@@ -484,7 +530,7 @@ export class View {
                         <meta http-equiv="X-UA-Compatible" content="IE=edge">
                         <title>${this.messages.general.title}</title>
                         <style>${this.style}</style>
-                        <script src="${resolveAsUri('lib', 'pdfjs-dist', 'pdf.js')}"></script>
+                        <script nonce="${nonce}" src="${resolveAsUri('lib', 'pdfjs-dist', 'pdf.js')}"></script>
                     </head>`;
 			body = `
                 <body>
@@ -495,9 +541,14 @@ export class View {
                     <div class="page-content">
                         <h3>${filePath}<br/><br/>${mimeType}</h3>
                         <div class="content encoded-content">
-                            <button id="switchButton" onclick="switchContent()">${
-								this.messages.pdf.orderedElements.text.button
-							}</button>
+                            <div class="button-bar">
+                                <button id="switchButton" onclick="switchContent()">${
+									this.messages.pdf.orderedElements.text.button
+								}</button>
+                                <button id="copyButton" onclick="postMessage('copy', '${mimeType}', '${content}')">${
+				this.messages.general.copyButton
+			}</button>
+                            </div>
                             <code id="code-tag">${content}</code>
                             <br/>
                             <details id="pdfImagesList">
@@ -505,8 +556,10 @@ export class View {
                             </details>
                         </div>
                     </div>
+            
+                    <script nonce="${nonce}" src="${resolveAsUri('src', 'assets', 'postMsg.js')}"></script>
 
-                    <script>
+                    <script nonce="${nonce}">
                         var displayed = "content";
                         var textElementsList = "";
 
@@ -612,14 +665,47 @@ export class View {
             
                     <div class="page-content">
                         <h3>${filePath}<br/><br/>${mimeType}</h3>
-                        <div class="content">
+                        <div class="content encoded-content">
+                            <div class="button-bar">
+                                <button id="copyButton" onclick="postMessage('copy', '${mimeType}', '${content}')">${
+				this.messages.general.copyButton
+			}</button>
+                            </div>
                             <code id="code-tag">${content}</code>
                         </div>
                     </div>
+            
+                    <script nonce="${nonce}" src="${resolveAsUri('src', 'assets', 'postMsg.js')}"></script>
                 </body>
             </html>`;
 		}
 
 		return head + body;
+	}
+
+	private saveDecodedFile(mimeType: string, base64String: string) {
+		const mT = new MimeTypes();
+
+		let mTKeys = [...mT.mimeTypes.entries()].filter(({ 1: v }) => v === mimeType).map(([k]) => k);
+		let fileExtension = mTKeys[0];
+		let fileName = new Date().toDateString() + '.' + fileExtension;
+
+		let buf = new Buffer(base64String, 'base64');
+
+		fs.writeFile(fileName, buf, (err) => {
+			if (err) {
+				this.showErrorPopup(this.messages.general.fileSave.error + ' : ' + err);
+			} else {
+				this.showInformationPopup(this.messages.general.fileSave.success + ' : ' + fileName);
+			}
+		});
+	}
+
+	private showErrorPopup(message: string) {
+		vscode.window.showErrorMessage(message);
+	}
+
+	private showInformationPopup(message: string) {
+		vscode.window.showInformationMessage(message);
 	}
 }
