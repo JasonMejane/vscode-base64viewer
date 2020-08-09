@@ -52,3 +52,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Minor code refactoring
 - Minor style changes
+
+## [1.2.1] - 2020-08-09
+
+### Fixed
+
+- Copy to clipboard and Save file on computer (Issue #6)
