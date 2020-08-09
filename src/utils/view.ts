@@ -288,7 +288,18 @@ export class View {
                         </div>
                     </div>
             
-                    <script nonce="${nonce}" src="${resolveAsUri('src', 'assets', 'postMsg.js')}"></script>
+                    <script nonce="${nonce}">
+                        const vscode = acquireVsCodeApi();
+
+                        function postMessage(command, mimeType, text) {
+                            var message = {
+                                command: command,
+                                mimeType: mimeType,
+                                text: text,
+                            };
+                            vscode.postMessage(message);
+                        }
+                    </script>
             
                     <script nonce="${nonce}">
                         var pdfData = atob('${base64String}');
@@ -447,7 +458,18 @@ export class View {
                         </div>
                     </div>
             
-                    <script nonce="${nonce}" src="${resolveAsUri('src', 'assets', 'postMsg.js')}"></script>
+                    <script nonce="${nonce}">
+                        const vscode = acquireVsCodeApi();
+
+                        function postMessage(command, mimeType, text) {
+                            var message = {
+                                command: command,
+                                mimeType: mimeType,
+                                text: text,
+                            };
+                            vscode.postMessage(message);
+                        }
+                    </script>
                 </body>
             </html>`;
 		} else if (mimeType.includes('text')) {
@@ -480,7 +502,18 @@ export class View {
                         </div>
                     </div>
             
-                    <script nonce="${nonce}" src="${resolveAsUri('src', 'assets', 'postMsg.js')}"></script>
+                    <script nonce="${nonce}">
+                        const vscode = acquireVsCodeApi();
+
+                        function postMessage(command, mimeType, text) {
+                            var message = {
+                                command: command,
+                                mimeType: mimeType,
+                                text: text,
+                            };
+                            vscode.postMessage(message);
+                        }
+                    </script>
                         
                     <script nonce="${nonce}">
                         var text = atob('${base64String}');
@@ -519,7 +552,18 @@ export class View {
                         </div>
                     </div>
             
-                    <script nonce="${nonce}" src="${resolveAsUri('src', 'assets', 'postMsg.js')}"></script>
+                    <script nonce="${nonce}">
+                        const vscode = acquireVsCodeApi();
+
+                        function postMessage(command, mimeType, text) {
+                            var message = {
+                                command: command,
+                                mimeType: mimeType,
+                                text: text,
+                            };
+                            vscode.postMessage(message);
+                        }
+                    </script>
                 </body>
             </html>`;
 		}
@@ -582,7 +626,18 @@ export class View {
                         </div>
                     </div>
             
-                    <script nonce="${nonce}" src="${resolveAsUri('src', 'assets', 'postMsg.js')}"></script>
+                    <script nonce="${nonce}">
+                        const vscode = acquireVsCodeApi();
+
+                        function postMessage(command, mimeType, text) {
+                            var message = {
+                                command: command,
+                                mimeType: mimeType,
+                                text: text,
+                            };
+                            vscode.postMessage(message);
+                        }
+                    </script>
 
                     <script nonce="${nonce}">
                         var displayed = "content";
@@ -693,15 +748,24 @@ export class View {
                         <h3>${filePath}<br/><br/>${mimeType}</h3>
                         <div class="content encoded-content">
                             <div class="button-bar">
-                                <button class="action-button" onclick="postMessage('copy', '${mimeType}', '${content}')">${
-				this.messages.general.copyButton
-			}</button>
+                                <button class="action-button" onclick="postMessage('copy', '${mimeType}', '${content}')">${this.messages.general.copyButton}</button>
                             </div>
                             <code id="code-tag">${content}</code>
                         </div>
                     </div>
             
-                    <script nonce="${nonce}" src="${resolveAsUri('src', 'assets', 'postMsg.js')}"></script>
+                    <script nonce="${nonce}">
+                        const vscode = acquireVsCodeApi();
+
+                        function postMessage(command, mimeType, text) {
+                            var message = {
+                                command: command,
+                                mimeType: mimeType,
+                                text: text,
+                            };
+                            vscode.postMessage(message);
+                        }
+                    </script>
                 </body>
             </html>`;
 		}
