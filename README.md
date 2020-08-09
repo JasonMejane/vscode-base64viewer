@@ -13,8 +13,8 @@ You can decode Base64 strings corresponding to :
 - Images (BMP, GIF, ICO, JPG, PNG, SVG, TIF)
 
 Other formats might be added in the future.
-
 When the Base64 string corresponds to a PDF file, a second column, next to the PDF viewer, is added, showing all text elements and images found in the PDF file.
+Even if the file can't be displayed (due to VSCode limitations, if it is a video for instance), the decoded file can easily be saved on your computer with the click of a button.
 
 ### Base64 Encoding
 

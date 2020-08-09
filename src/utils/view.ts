@@ -36,11 +36,26 @@ export class View {
         vertical-align: middle;
         width: 100%;
     }
+    
+    .action-button {
+        background-color: #303030;
+        border: #dddddd solid 1px;
+        color: #dddddd;
+        font-size: 1.1em;
+        margin: 8px 12px;
+        max-width: fit-content;
+        padding: 8px;
+    }
 
     .button-bar {
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+
+    .centered-column {
+        display: flex;
+        justify-content: center;
     }
     
     .content {
@@ -56,12 +71,6 @@ export class View {
         display: flex;
         flex-direction: column;
         justify-content: center;
-    }
-    
-    .img-content {
-        border-top: #909090 solid 1px;
-        margin: 4px;
-        padding: 8px 0;
     }
     
     .page-content {
@@ -125,16 +134,6 @@ export class View {
     .two-col > :last-child {
         flex-grow: 1;
     }
-    
-    #switchButton, #copyButton {
-        background-color: #303030;
-        border: #dddddd solid 1px;
-        color: #dddddd;
-        font-size: 1.1em;
-        margin: 8px 12px;
-        max-width: fit-content;
-        padding: 8px;
-    }
     `;
 
 	constructor() {
@@ -150,7 +149,12 @@ export class View {
 		filePath?: string,
 	) {
 		// Create and show panel
-		var webviewPanel = vscode.window.createWebviewPanel('base64viewer', 'Base64 Viewer', vscode.ViewColumn.Two, {});
+		var webviewPanel = vscode.window.createWebviewPanel(
+			'base64viewer',
+			this.messages.general.title,
+			vscode.ViewColumn.Two,
+			{},
+		);
 		webviewPanel.webview.options = {
 			enableScripts: true,
 		};
@@ -245,15 +249,20 @@ export class View {
                         <div>
                             <h3>${mimeType}  (${fileSize})</h3>
                             <div class="pdf-content">
+                                <div class="button-bar">
+                                    <button class="action-button" onclick="postMessage('save', '${mimeType}', '${base64String}')">
+                                        ${this.messages.general.saveButton}
+                                    </button>
+                                </div>
                                 <div class="pdf-navbar">
                                     <div class="spacer"></div>
             
                                     <div class="page-nav">
                                         <button onclick="changePage(loadedPdf, currentPage, 'prev')"><</button>
                                         <span>
-                                        ${
-											this.messages.pdf.page
-										} : <span id="currentPage"></span> / <span id="totalPage"></span>
+                                            ${
+												this.messages.pdf.page
+											} : <span id="currentPage"></span> / <span id="totalPage"></span>
                                         </span>
                                         <button onclick="changePage(loadedPdf, currentPage, 'next')">></button>
                                     </div>
@@ -343,10 +352,11 @@ export class View {
                                     var blob = recut[0].split('href="');
                                     blob = blob[1].split('"');
                                     var svgSrc = blob[0];
-
+                                    
                                     var img = document.createElement("IMG");
                                     img.setAttribute('src', svgSrc)
                                     img.setAttribute('width', '80%');
+
                                     document.getElementById('pdfImagesList').appendChild(img);
                                 }
                             });	
@@ -427,7 +437,12 @@ export class View {
             
                     <div class="page-content">
                         <h3>${mimeType}  (${fileSize})</h3>
-                        <div class="img-content">
+                        <div class="content">
+                            <div class="button-bar">
+                                <button class="action-button" onclick="postMessage('save', '${mimeType}', '${base64String}')">
+                                    ${this.messages.general.saveButton}
+                                </button>
+                            </div>
                             <img src="data:${mimeType};base64,${base64String}"/>
                         </div>
                     </div>
@@ -456,6 +471,11 @@ export class View {
                     <div class="page-content">
                         <h3>${mimeType}  (${fileSize})</h3>
                         <div class="content">
+                            <div class="button-bar">
+                                <button class="action-button" onclick="postMessage('save', '${mimeType}', '${base64String}')">
+                                    ${this.messages.general.saveButton}
+                                </button>
+                            </div>
                             <code id="code-tag"></code>
                         </div>
                     </div>
@@ -490,6 +510,11 @@ export class View {
                     <div class="page-content">
                         <h3>${mimeType}  (${fileSize})</h3>
                         <div class="content">
+                            <div class="button-bar">
+                                <button class="action-button" onclick="postMessage('save', '${mimeType}', '${base64String}')">
+                                    ${this.messages.general.saveButton}
+                                </button>
+                            </div>
                             <h2>${this.messages.general.cantDisplayContent}</h2>
                         </div>
                     </div>
@@ -542,10 +567,10 @@ export class View {
                         <h3>${filePath}<br/><br/>${mimeType}</h3>
                         <div class="content encoded-content">
                             <div class="button-bar">
-                                <button id="switchButton" onclick="switchContent()">${
+                                <button id="switchButton" class="action-button" onclick="switchContent()">${
 									this.messages.pdf.orderedElements.text.button
 								}</button>
-                                <button id="copyButton" onclick="postMessage('copy', '${mimeType}', '${content}')">${
+                                <button class="action-button" onclick="postMessage('copy', '${mimeType}', '${content}')">${
 				this.messages.general.copyButton
 			}</button>
                             </div>
@@ -599,6 +624,7 @@ export class View {
                                     var img = document.createElement("IMG");
                                     img.setAttribute('src', svgSrc)
                                     img.setAttribute('width', '80%');
+
                                     document.getElementById('pdfImagesList').appendChild(img);
                                 }
                             });	
@@ -667,7 +693,7 @@ export class View {
                         <h3>${filePath}<br/><br/>${mimeType}</h3>
                         <div class="content encoded-content">
                             <div class="button-bar">
-                                <button id="copyButton" onclick="postMessage('copy', '${mimeType}', '${content}')">${
+                                <button class="action-button" onclick="postMessage('copy', '${mimeType}', '${content}')">${
 				this.messages.general.copyButton
 			}</button>
                             </div>
@@ -685,20 +711,39 @@ export class View {
 
 	private saveDecodedFile(mimeType: string, base64String: string) {
 		const mT = new MimeTypes();
+		const xss = require('xss');
 
 		let mTKeys = [...mT.mimeTypes.entries()].filter(({ 1: v }) => v === mimeType).map(([k]) => k);
 		let fileExtension = mTKeys[0];
-		let fileName = new Date().toDateString() + '.' + fileExtension;
 
-		let buf = new Buffer(base64String, 'base64');
+		vscode.window
+			.showInputBox({
+				prompt: this.messages.general.prompt.save,
+			})
+			.then(
+				(name) => {
+					let fileName = '';
 
-		fs.writeFile(fileName, buf, (err) => {
-			if (err) {
-				this.showErrorPopup(this.messages.general.fileSave.error + ' : ' + err);
-			} else {
-				this.showInformationPopup(this.messages.general.fileSave.success + ' : ' + fileName);
-			}
-		});
+					if (name !== undefined) {
+						fileName = xss(name);
+					} else {
+						fileName = new Date().toISOString();
+					}
+
+					fileName = fileName + '.' + fileExtension;
+
+					let buf = Buffer.from("'" + base64String + "'", 'base64');
+
+					fs.writeFile(fileName, buf, (err) => {
+						if (err) {
+							this.showErrorPopup(this.messages.general.fileSave.error + ' : ' + err);
+						} else {
+							this.showInformationPopup(this.messages.general.fileSave.success + ' : ' + fileName);
+						}
+					});
+				},
+				(reason) => this.showErrorPopup(reason),
+			);
 	}
 
 	private showErrorPopup(message: string) {

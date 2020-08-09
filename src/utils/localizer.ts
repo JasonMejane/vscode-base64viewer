@@ -6,6 +6,7 @@ export class Localizer {
 				cantDisplayContent: "This format can't be displayed!",
 				copiedToClipboard: 'Base64 string copied to clipboard!',
 				copyButton: 'Copy to clipboard',
+				saveButton: 'Save the file',
 				fileSave: {
 					error: 'Error while saving the file',
 					success: 'File successfully saved',
@@ -14,6 +15,7 @@ export class Localizer {
 				prompt: {
 					decode: 'Enter the Base64 string to decode',
 					encode: 'Choose the file you want to encode to a Base 64 string...',
+					save: 'Choose a name for the file',
 				},
 				title: 'Base64 Viewer',
 				unknownType: 'Unknown type',
@@ -39,6 +41,7 @@ export class Localizer {
 				cantDisplayContent: 'Ce contenu ne peut pas être affiché !',
 				copiedToClipboard: 'Chaîne Base64 copiée dans le presse-papier !',
 				copyButton: 'Copier dans le presse-papier',
+				saveButton: 'Enregistrer le fichier',
 				fileSave: {
 					error: 'Erreur lors de la sauvegarde du fichier',
 					success: 'Fichier sauvegardé avec succès',
@@ -47,6 +50,7 @@ export class Localizer {
 				prompt: {
 					decode: 'Entrez la chaîne Base64 à décoder',
 					encode: 'Choisissez le fichier que vous souhaitez encoder en Base64...',
+					save: 'Choisissez un nom pour le fichier',
 				},
 				title: 'Visionneur Base64',
 				unknownType: 'Type inconnu',

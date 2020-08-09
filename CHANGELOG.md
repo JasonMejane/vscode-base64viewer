@@ -38,7 +38,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - unused tasks.json (PR #1)
 - vsc-extension-quickstart.md (PR #1)
 
-## [1.2.0] - 2020-08-
+## [1.2.0] - 2020-08-08
 
 ### Added
 
@@ -46,6 +46,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - i18n support (English and French for now) using custom localization class
 - XSS sanitizing on user inputs
 - Copy Base64 string to clipboard after encoding a file
+- Save decoded file on computer
 
 ### Changed
 
