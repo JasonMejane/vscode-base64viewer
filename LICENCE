@@ -1,6 +1,8 @@
 This project incorporates components from the projects listed below. 
 
 - PDF.js (https://github.com/mozilla/pdf.js/blob/master/LICENSE)
+- mime (https://github.com/broofa/mime/blob/master/LICENSE)
+- xss (https://github.com/leizongmin/js-xss/blob/master/LICENSE)
 
 =========================================
 Copyright (c) Jason Mejane

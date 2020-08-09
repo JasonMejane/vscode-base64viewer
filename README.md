@@ -13,13 +13,14 @@ You can decode Base64 strings corresponding to :
 - Images (BMP, GIF, ICO, JPG, PNG, SVG, TIF)
 
 Other formats might be added in the future.
-
-When the Base64 string corresponds to a PDF file, a second column, next to the PDF viewer, is added, showing all text elements found in the PDF file.
+When the Base64 string corresponds to a PDF file, a second column, next to the PDF viewer, is added, showing all text elements and images found in the PDF file.
+Even if the file can't be displayed (due to VSCode limitations, if it is a video for instance), the decoded file can easily be saved on your computer with the click of a button.
 
 ### Base64 Encoding
 
 You can encode any file to a Base64 string.
-When encoding a PDF file, you can switch the view between the Base64 string and a list of text elements found in the file.
+When encoding a PDF file, you can switch the view between the Base64 string and a list of text elements and images found in the file.
+The Base64 string can easily be used by copying it to your clipboard with the click of a button.
 
 ## Extension Settings
 
@@ -27,6 +28,8 @@ Two commands are available (access them using the command pallete: `Ctrl+Shift+P
 
 - `base64viewer.decodeBase64`: Show an input where you can paste the Base64 string to decode
 - `base64viewer.encodeBase64`: Open a file selection dialog where you can choose a file to encode
+
+The extension supports English and French languages, based on your VSCode set language. More languages might be added in the future.
 
 ## Demos
 
