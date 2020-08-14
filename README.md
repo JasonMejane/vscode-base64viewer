@@ -8,9 +8,13 @@ Decode Base64 strings and show the file, and encode files to Base64 strings.
 
 You can decode Base64 strings corresponding to :
 
-- Plain text
-- PDF
-- Images (BMP, GIF, ICO, JPG, PNG, SVG, TIF)
+- Plain text - _Decoded file/text displayed_
+- PDF - _Decoded file displayed_
+- Images (BMP, GIF, ICO, JPG, PNG, SVG, TIF) - _Decoded file displayed_
+- Audio (MP3, OGG, WAV)
+- Video (MPEG, OGG, WebM)
+- RAR, ZIP
+- EXE
 
 Other formats might be added in the future.
 When the Base64 string corresponds to a PDF file, a second column, next to the PDF viewer, is added, showing all text elements and images found in the PDF file.
