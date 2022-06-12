@@ -58,3 +58,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Copy to clipboard and Save file on computer (Issue #6)
+
+## [1.3.0] - 2022-06-11
+
+### Added
+
+- Call decode command with string parameter directly without going through input box (PR #21 - Issue #20)

@@ -16,15 +16,19 @@ export function activate(context: vscode.ExtensionContext) {
 	const xss = require('xss');
 
 	// Register commands
-	let command = vscode.commands.registerCommand('base64viewer.decodeBase64', () => {
-		vscode.window
-			.showInputBox({
-				prompt: messages.general.prompt.decode,
-			})
-			.then(
-				(base64String) => decodeAndDisplay(extensionRoot, xss(base64String)),
-				(reason) => showErrorPopup(reason),
-			);
+	let command = vscode.commands.registerCommand('base64viewer.decodeBase64', (base64Input?: string) => {
+		if (base64Input) {
+			decodeAndDisplay(extensionRoot, xss(base64Input));
+		} else {
+			vscode.window
+				.showInputBox({
+					prompt: messages.general.prompt.decode,
+				})
+				.then(
+					(base64String) => decodeAndDisplay(extensionRoot, xss(base64String)),
+					(reason) => showErrorPopup(reason),
+				);
+		}
 	});
 	context.subscriptions.push(command);
 
