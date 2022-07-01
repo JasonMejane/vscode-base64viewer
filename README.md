@@ -9,6 +9,7 @@ Decode Base64 strings and show the file, and encode files to Base64 strings.
 You can decode Base64 strings corresponding to :
 
 - Plain text - _Decoded file/text displayed_
+- HTML/CSS/JS - _Decoded file/text displayed_
 - PDF - _Decoded file displayed_
 - Images (BMP, GIF, ICO, JPG, PNG, SVG, TIF) - _Decoded file displayed_
 - Audio (MP3, OGG, WAV)
