@@ -64,3 +64,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Call decode command with string parameter directly without going through input box (PR #21 - Issue #20)
+
+## [1.4.0] - 2022-07-01
+
+### Added
+
+- Support HTML/CSS/JS files (Issue #24)
