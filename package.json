@@ -3,7 +3,7 @@
 	"displayName": "Base64Viewer",
 	"description": "Easy to use Base64 decoder/encoder and viewer",
 	"publisher": "JasonMejane",
-	"version": "1.4.1",
+	"version": "1.5.0",
 	"engines": {
 		"vscode": "^1.47.0"
 	},
@@ -75,9 +75,9 @@
 		]
 	},
 	"dependencies": {
-		"mime": "2.6.0",
-		"pdfjs-dist": "2.4.456",
-		"xss": "1.0.13"
+		"mime": "3.0.0",
+		"pdfjs-dist": "2.16.105",
+		"xss": "1.0.14"
 	},
 	"devDependencies": {
 		"@types/glob": "^7.2.0",

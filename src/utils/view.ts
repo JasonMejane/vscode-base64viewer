@@ -99,7 +99,7 @@ export class View {
         padding: 8px;
     }
     
-    .pdf-navbar button {
+    .pdf-navbar button, #showHideToggle {
         background-color: #303030;
         border: #dddddd solid 1px;
         color: #dddddd;
@@ -244,37 +244,40 @@ export class View {
                     <div class="title-bar">
                         <h1>${this.messages.general.title}</h1>
                     </div>
+
+                    <div class="page-content two-col">
+                        <h3>${mimeType}  (${fileSize})</h3>
+
+                        <button id="showHideToggle" onclick="showOrHideOrderedTextAndImages()"><<</button>
+                    </div>
             
                     <div class="page-content two-col">
-                        <div>
-                            <h3>${mimeType}  (${fileSize})</h3>
-                            <div class="pdf-content">
-                                <div class="button-bar">
-                                    <button class="action-button" onclick="postMessage('save', '${mimeType}', '${base64String}')">
-                                        ${this.messages.general.saveButton}
-                                    </button>
-                                </div>
-                                <div class="pdf-navbar">
-                                    <div class="spacer"></div>
-            
-                                    <div class="page-nav">
-                                        <button onclick="changePage(loadedPdf, currentPage, 'prev')"><</button>
-                                        <span>
-                                            ${
-												this.messages.pdf.page
-											} : <span id="currentPage"></span> / <span id="totalPage"></span>
-                                        </span>
-                                        <button onclick="changePage(loadedPdf, currentPage, 'next')">></button>
-                                    </div>
-            
-                                    <div class="spacer"></div>
-                                </div>
-            
-                                <canvas id="pdfCanvas"></canvas>
+                        <div class="pdf-content">
+                            <div class="button-bar">
+                                <button class="action-button" onclick="postMessage('save', '${mimeType}', '${base64String}')">
+                                    ${this.messages.general.saveButton}
+                                </button>
                             </div>
+                            <div class="pdf-navbar">
+                                <div class="spacer"></div>
+
+                                <div class="page-nav">
+                                    <button onclick="changePage(loadedPdf, currentPage, 'prev')"><</button>
+                                    <span>
+                                        ${
+											this.messages.pdf.page
+										} : <span id="currentPage"></span> / <span id="totalPage"></span>
+                                    </span>
+                                    <button onclick="changePage(loadedPdf, currentPage, 'next')">></button>
+                                </div>
+                                    
+                                <div class="spacer"></div>
+                            </div>
+                                    
+                            <canvas id="pdfCanvas"></canvas>
                         </div>
-            
-                        <div>
+                        
+                        <div id="textAndImages" hidden>
                             <div>
                                 <h3>${this.messages.pdf.orderedElements.text.title}</h3>
                                 <div class="content">
@@ -302,6 +305,7 @@ export class View {
                     </script>
             
                     <script nonce="${nonce}">
+                        var displayed = "pdf";
                         var pdfData = atob('${base64String}');
                         var pdfjsLib = window['pdfjs-dist/build/pdf'];
                         pdfjsLib.GlobalWorkerOptions.workerSrc = '${resolveAsUri(
@@ -404,7 +408,7 @@ export class View {
                             var currentPageElement = document.getElementById('currentPage');
                         
                             pdf.getPage(pageNum).then(function(page) {
-                                var scale = 1.5;
+                                var scale = (displayed === "all") ? 1.5 : 2.05;
                                 var viewport = page.getViewport({scale: scale});
                           
                                 // Prepare canvas using PDF page dimensions
@@ -424,6 +428,23 @@ export class View {
                                     currentPage = pageNum;
                                 });
                             });
+                        }
+
+                        function showOrHideOrderedTextAndImages() {
+                            var section = document.getElementById('textAndImages');
+                            var switchButton = document.getElementById('showHideToggle');
+
+                            if (displayed === "all") {
+                                section.hidden = true;
+                                displayed = "pdf";
+                                switchButton.innerText = "<<";
+                            } else {
+                                section.hidden = false;
+                                displayed = "all";
+                                switchButton.innerText = ">>";
+                            }
+
+                            renderPage(loadedPdf, currentPage);
                         }
                     </script>
                 </body>
