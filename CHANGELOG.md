@@ -77,3 +77,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Merge missing code
 - Edit README
+
+## [1.5.0] - 2022-09-17
+
+### Added
+
+- Allow to show/hide ordered text and images elements of a decoded PDF (now hidden by default)
+
+### Changed
+
+- Tech updates
