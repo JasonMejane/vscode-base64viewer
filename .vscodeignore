@@ -10,4 +10,5 @@ vscode-base64viewer.svg
 webpack.config.js
 .gitignore
 *.vslx
+*.vsix
 nextDev
