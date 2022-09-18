@@ -815,15 +815,19 @@ export class View {
 						fileName = new Date().toISOString();
 					}
 
-					fileName = fileName + '.' + fileExtension;
+					const filePath = vscode.workspace.workspaceFolders?.length
+						? vscode.workspace.workspaceFolders[0].uri.fsPath
+						: '';
+					const separator = filePath.includes('/') ? '/' : '\\';
+					const file = `${filePath}${separator}${fileName}.${fileExtension}`;
 
 					let buf = Buffer.from("'" + base64String + "'", 'base64');
 
-					fs.writeFile(fileName, buf, (err) => {
+					fs.writeFile(file, buf, (err) => {
 						if (err) {
-							this.showErrorPopup(this.messages.general.fileSave.error + ' : ' + err);
+							this.showErrorPopup(this.messages.general.fileSave.error + ':\n' + err);
 						} else {
-							this.showInformationPopup(this.messages.general.fileSave.success + ' : ' + fileName);
+							this.showInformationPopup(this.messages.general.fileSave.success + ':\n' + file);
 						}
 					});
 				},

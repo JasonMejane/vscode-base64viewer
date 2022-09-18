@@ -87,3 +87,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Tech updates
+
+## [1.5.1] - 2022-09-18
+
+### Fixed
+
+- Save decoded file path
+
+## [1.5.2] - 2022-09-18
+
+### Fixed
+
+- Rename LICENSE file
