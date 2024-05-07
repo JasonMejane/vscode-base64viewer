@@ -76,7 +76,7 @@
 	},
 	"dependencies": {
 		"mime": "3.0.0",
-		"pdfjs-dist": "2.16.105",
+		"pdfjs-dist": "4.2.67",
 		"xss": "1.0.14"
 	},
 	"devDependencies": {
@@ -94,7 +94,7 @@
 		"husky": "^8.0.3",
 		"lint-staged": "^13.2.1",
 		"mocha": "^10.2.0",
-		"pdfjs-dist": "2.4.456",
+		"pdfjs-dist": "4.2.67",
 		"prettier": "^2.0.5",
 		"style-loader": "^1.3.0",
 		"ts-loader": "^8.4.0",
